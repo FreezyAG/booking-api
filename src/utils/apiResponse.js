@@ -26,12 +26,11 @@ export const JsonResponse = (
   data = null,
   meta = null
 ) => {
-  const body = {
-    msg: "",
-    data: null,
-    meta: null,
-  };
+  const body = {};
 
+  if (msg) {
+    body.message = msg;
+  }
   if (data) {
     body.data = data;
   }
@@ -41,11 +40,13 @@ export const JsonResponse = (
 
   if (typeof msg === "string") {
     const data = MsgTypes[msg];
+
     if (typeof data !== "undefined") {
       body.msg = MsgTypes[msg];
     } else {
       body.msg = msg;
     }
+    
   }
   
   res.status(status ?? 200).send(body);

@@ -1,22 +1,8 @@
-import moment from 'moment-timezone'
+import { JsonResponse } from '../utils/apiResponse'
 
-import service from '../services/business'
-
-import { sendFailureResponse, sendSuccessResponse } from '../utils/apiResponse'
-
-
-const getBookings = async function (req, res) {
-  const { user } = req
-  const { week = new Date() } = req.query
-
-  try {
-    const bookings = await service.getBookingsInWeekForUser(user.id, week)
-
-    sendSuccessResponse(res, 'operation successful', bookings)
-
-  } catch (err) {
-    sendFailureResponse(err)
-  }
+const getBookings = async function (_, res) {
+  console.log('heree')
+  JsonResponse(res, 501, 'Not Implemented')
 }
 
 export default { getBookings }

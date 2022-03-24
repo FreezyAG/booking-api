@@ -9,18 +9,25 @@ async function getBookingsInWeekForUser(userId, week) {
     where: { 
       agentId: userId,
       startAt: {
-        [Op.gte]: moment(week).startOf('week').toDate()
+        [Op.gte]: moment.utc(week).startOf('week').toDate()
       },
       finishAt: {
-        [Op.lte]: moment(week).endOf('week').toDate()
+        [Op.lte]: moment.utc(week).endOf('week').toDate()
       }
      },
     include: 'booked'
-  }, {
+  }, {})
+}
+
+async function deleteBookingById(bookingId) {
+  return Booking.destroy({
+    where: {
+      id: bookingId
+    }
   })
 }
 
-
 export default {
-  getBookingsInWeekForUser
+  getBookingsInWeekForUser,
+  deleteBookingById
 }

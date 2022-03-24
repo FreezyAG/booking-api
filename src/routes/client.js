@@ -1,10 +1,11 @@
 import express from "express";
-var router = express.Router();
+const router = express.Router();
 
-/* GET home page. */
-router.get('/', function (req, res, next) {
-  console.log('client')
-  res.json({ message: 'alive' });
-});
+import { isAuthenticated, isAdmin } from '../middleware/auth'
+import clientController from '../controllers/client'
+
+router.get('/scheduler', isAuthenticated, clientController.getBookings);
+router.post('/booking', isAuthenticated, isAdmin, clientController.getBookings);
+router.delete('/booking/:id', isAuthenticated, isAdmin, clientController.deleteBooking);
 
 export default router;
