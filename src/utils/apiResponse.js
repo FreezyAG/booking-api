@@ -42,9 +42,9 @@ export const JsonResponse = (
     const data = MsgTypes[msg];
 
     if (typeof data !== "undefined") {
-      body.msg = MsgTypes[msg];
+      body.message = MsgTypes[msg];
     } else {
-      body.msg = msg;
+      body.message = msg;
     }
     
   }

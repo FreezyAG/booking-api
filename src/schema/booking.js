@@ -3,12 +3,8 @@
 /* -------------------------------------------------------------------------- */
 import Joi from "joi";
 
-export const PostUserRequestBody = Joi.object({
-  firstName: Joi.string().min(1).required(),
-  lastName: Joi.string().min(1).required(),
-});
-
-export const PatchUserRequestBody = Joi.object({
-  firstName: Joi.string(),
-  lastName: Joi.string(),
+export const Booking = Joi.object({
+  userId: Joi.number().required(),
+  startAt: Joi.date().required(),
+  finishAt: Joi.date().required(),
 });

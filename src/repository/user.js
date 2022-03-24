@@ -2,13 +2,31 @@ import { User } from '../db/model/index.js'
 
 async function findUsersForAgent(agentId) {
   return User.findAll({
-    where: {agent: agentId}
+    where: { agentId }
   })
 }
 
 async function findById(id) {
   return User.findOne({
-    where: { id }
+    where: { id, type: 'user' }
+  })
+}
+
+async function getUser(id) {
+  return User.findOne({
+    where: { id, type: 'user' }
+  })
+}
+
+async function getAgent(id) {
+  return User.findOne({
+    where: { id, type: 'agent' }
+  })
+}
+
+async function getAgents() {
+  return User.findAll({
+    where: { type: 'agent' }
   })
 }
 
@@ -18,8 +36,19 @@ async function getBookingsForUser(id) {
   })
 }
 
+async function linkUserToAgent(agentId, userId) {
+  return User.update(
+    { agentId },
+    { where: { id: userId, type: 'user' } }
+  )
+}
+
 export default { 
   findUsersForAgent, 
   findById,
-  getBookingsForUser
+  getBookingsForUser,
+  linkUserToAgent,
+  getAgent,
+  getAgents,
+  getUser
 }

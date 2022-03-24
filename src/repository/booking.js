@@ -19,6 +19,10 @@ async function getBookingsInWeekForUser(userId, week) {
   }, {})
 }
 
+async function create(booking) {
+  return Booking.create(booking)
+}
+
 async function deleteBookingById(bookingId) {
   return Booking.destroy({
     where: {
@@ -29,5 +33,6 @@ async function deleteBookingById(bookingId) {
 
 export default {
   getBookingsInWeekForUser,
-  deleteBookingById
+  deleteBookingById,
+  create
 }

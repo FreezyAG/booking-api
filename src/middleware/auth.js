@@ -7,7 +7,9 @@ export const isAuthenticated = async (req, res, next) => {
   const agentId = req.header("x-agent-id");
   if (!agentId) return JsonResponse(res, 401, MsgTypes.ACCESS_DENIED);
   try {
-    req.user = await User.findById(agentId);
+    const user = await User.getAgent(agentId);
+    if (!user) JsonResponse(res, 401, "Unauthenticated " + err);
+    req.user = user
     next();
   } catch (err) {
     JsonResponse(res, 406, "USER NOT FOUND " + err);

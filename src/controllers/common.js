@@ -15,4 +15,16 @@ const getUsers = async function (req, res) {
   }
 }
 
-export default { getUsers }
+const getAgents = async function (req, res) {
+
+  try {
+
+    const agents = await service.getAgents()
+    sendSuccessResponse(res, 'operation successful', agents)
+
+  } catch (err) {
+    sendFailureResponse(err)
+  }
+}
+
+export default { getUsers, getAgents }
