@@ -1,4 +1,4 @@
-import Sequelize from "sequelize";
+import Sequelize from 'sequelize';
 
 import userModel from "./user"
 import bookingModel from "./booking"
@@ -20,4 +20,20 @@ const sequelize = new Sequelize(dbConfig.database, dbConfig.username, dbConfig.p
 const User = userModel(sequelize, Sequelize);
 const Booking = bookingModel(sequelize, Sequelize);
 
-export { Sequelize, sequelize, User, Booking }
+const db = {};
+
+db[User.name] = User
+db[Booking.name] = Booking
+
+Object.keys(db).forEach(modelName => {
+  if (db[modelName].associate) {
+    db[modelName].associate(db);
+  }
+});
+
+db.sequelize = sequelize;
+db.Sequelize = Sequelize;
+
+export { sequelize, User, Booking }
+
+export default db

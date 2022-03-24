@@ -1,4 +1,4 @@
-import { User } from '../db/model'
+import { User } from '../db/model/index.js'
 
 async function findUsersForAgent(agentId) {
   return User.findAll({
@@ -6,9 +6,9 @@ async function findUsersForAgent(agentId) {
   })
 }
 
-async function findOne(id) {
+async function findById(id) {
   return User.findOne({
-    where: { id}
+    where: { id }
   })
 }
 
@@ -20,6 +20,6 @@ async function getBookingsForUser(id) {
 
 export default { 
   findUsersForAgent, 
-  findOne,
+  findById,
   getBookingsForUser
 }

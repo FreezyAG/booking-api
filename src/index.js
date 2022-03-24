@@ -2,13 +2,8 @@
 /*                              external imports                              */
 /* -------------------------------------------------------------------------- */
 import path from "path";
-// import cookieParser from "cookie-parser";
-// import { Server } from "http";
-
 import express from "express";
 import dotEnv from 'dotenv';
-// import morgan from "morgan";
-// import helmet from "helmet";
 
 import { fileURLToPath } from 'url';
 
@@ -17,10 +12,8 @@ const __filename = fileURLToPath(import.meta.url);
 /* ---------------------------- internal imports ---------------------------- */
 import logger from "./utils/logger";
 import config from "./config";
-import { sequelize } from "./db/model";
+import { sequelize } from "./db/model/index.js";
 import cors from "./middleware/utils";
-
-// import { createMongoDBConnection } from "./db/mongodb";
 import ErrorHandler from "./middleware/error-handler";
 
 dotEnv.config({ path: path.resolve(path.dirname(__filename), './config/.env') })
@@ -38,11 +31,11 @@ app.use('/', routes);
 
 app.use(ErrorHandler);
 
-// db.sequelize.sync();
+sequelize.sync();
 // drop the table if it already exists
-sequelize.sync({ force: true }).then(() => {
-  console.log("Drop and re-sync db.");
-});
+// sequelize.sync({ force: true }).then(() => {
+//   console.log("Drop and re-sync db.");
+// });
 
 const port = config.server.port
 app.listen(port, () => logger.info(`server connected at port: ${port}`));

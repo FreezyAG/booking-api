@@ -1,4 +1,4 @@
-'use strict';
+const moment = require('moment-timezone')
 
 module.exports = {
   async up (queryInterface, Sequelize) {
@@ -8,26 +8,34 @@ module.exports = {
         {
           userId: 3,
           agentId: 1,
-          startAt: new Date(),
-          finishAt: new Date(),
-          createdAt: new Date(),
-          updatedAt: new Date(),
+          startAt: moment.utc().toDate(),
+          finishAt: moment.utc().add(1, 'day').toDate(),
+          createdAt: moment.utc().toDate(),
+          updatedAt: moment.utc().toDate(),
         },
         {
           userId: 4,
-          agentId: 2,
-          startAt: new Date(),
-          finishAt: new Date(),
-          createdAt: new Date(),
-          updatedAt: new Date(),
+          agentId: 1,
+          startAt: moment.utc().toDate(),
+          finishAt: moment.utc().add(1, 'day').toDate(),
+          createdAt: moment.utc().toDate(),
+          updatedAt: moment.utc().toDate(),
         },
         {
           userId: 3,
           agentId: 2,
-          startAt: new Date(),
-          finishAt: new Date(),
-          createdAt: new Date(),
-          updatedAt: new Date(),
+          startAt: moment.utc().toDate(),
+          finishAt: moment.utc().add(1, 'day').toDate(),
+          createdAt: moment.utc().toDate(),
+          updatedAt: moment.utc().toDate(),
+        },
+        {
+          userId: 4,
+          agentId: 2,
+          startAt: moment.utc().toDate(),
+          finishAt: moment.utc().add(1, 'day').toDate(),
+          createdAt: moment.utc().toDate(),
+          updatedAt: moment.utc().toDate(),
         },
       ],
       {},
