@@ -18,7 +18,7 @@ import ErrorHandler from "./middleware/error-handler";
 
 dotEnv.config({ path: path.resolve(path.dirname(__filename), './config/.env') })
 
-import routes from './routes/index';
+import routes from './routes';
 
 var app = express();
 
